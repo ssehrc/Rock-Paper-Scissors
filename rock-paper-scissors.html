@@ -8,49 +8,51 @@
             Rock Paper Scissors
         </p>
         <button onclick="
-        const computerMove = pickComputerMove();
-
-        let result = '';
-        if(computerMove ==='rock'){
-            result = 'Tie';
-        }else if(computerMove === 'paper'){
-            result = 'You lose.';
-        }else if(computerMove === 'scissors'){
-            result = 'You win.';
-        }
-        alert(`You picked rock. Computer picked ${computerMove}. ${result}`);
+            playGame('rock');
         ">Rock</button>
 
         <button onclick="
-        const computerMove = pickComputerMove();
-
-        let result = '';
-        if(computerMove ==='rock'){
-            result = 'You win.';
-        }else if(computerMove === 'paper'){
-            result = 'Tie.';
-        }else if(computerMove === 'scissors'){
-            result = 'You lose.';
-        }
-        alert(`You picked paper. Computer picked ${computerMove}. ${result}`);
-
+            playGame('paper');
         ">Paper</button>
 
         <button onclick="
-        const computerMove = pickComputerMove(); // step 1: when this button is clicked the function will be called
-
-        let result = ''; // step 3
-        if(computerMove ==='rock'){
-            result = 'You lose.';
-        }else if(computerMove === 'paper'){
-            result = 'You win.';
-        }else if(computerMove === 'scissors'){
-            result = 'Tie.';
-        }
-        alert(`You picked scissors. Computer picked ${computerMove}. ${result}`);
+            playGame('scissors');
         ">Scissors</button>
 
         <script>
+            function playGame(playerMove){
+                const computerMove = pickComputerMove(); 
+
+                let result = ''; 
+                if(playerMove === 'scissors'){
+                    if(computerMove ==='rock'){
+                        result = 'You lose.';
+                    }else if(computerMove === 'paper'){
+                        result = 'You win.';
+                    }else if(computerMove === 'scissors'){
+                        result = 'Tie.';
+                    }
+                }else if(playerMove === 'rock'){
+                    if(computerMove ==='rock'){
+                        result = 'Tie';
+                    }else if(computerMove === 'paper'){
+                        result = 'You lose.';
+                    }else if(computerMove === 'scissors'){
+                        result = 'You win.';
+                    }
+                }else{
+                    if(computerMove ==='rock'){
+                        result = 'You win.';
+                    }else if(computerMove === 'paper'){
+                        result = 'Tie.';
+                    }else if(computerMove === 'scissors'){
+                        result = 'You lose.';
+                    }
+                }
+                
+                alert(`You picked ${playerMove}. Computer picked ${computerMove}. ${result}`);
+            }
+
             function pickComputerMove() {
                 let randomNumber = Math.random();
                 let computerMove = '';
@@ -64,7 +66,7 @@
                     
                 }
                 return computerMove; //nothing will run after this because it return back to where the function was called
-                //step2: return value will then go back to the button and run the if/else statement
+                
             }
         </script>
     </body>
