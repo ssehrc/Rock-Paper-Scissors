@@ -2,87 +2,79 @@ let score = JSON.parse(localStorage.getItem('score')) || {
     wins: 0,
     losses: 0,
     ties: 0
-                };
-            
-                updateScoreElement();
-/*
-            if(!score){
-                score = {
-                    wins: 0,
-                    losses: 0,
-                    ties: 0
-                };
-            }
-*/
-            function playGame(playerMove){
-                const computerMove = pickComputerMove(); //step 1
-                //step 3:
-                let result = ''; 
-                if(playerMove === 'scissors'){ //scissors
-                    if(computerMove ==='rock'){
-                        result = 'You lose.';
-                    }else if(computerMove === 'paper'){
-                        result = 'You win.';
-                    }else if(computerMove === 'scissors'){
-                        result = 'Tie.';
-                    }
-                }else if(playerMove === 'rock'){//rock
-                    if(computerMove ==='rock'){
-                        result = 'Tie';
-                    }else if(computerMove === 'paper'){
-                        result = 'You lose.';
-                    }else if(computerMove === 'scissors'){
-                        result = 'You win.';
-                    }
-                }else{//paper or else
-                    if(computerMove ==='rock'){
-                        result = 'You win.';
-                    }else if(computerMove === 'paper'){
-                        result = 'Tie.';
-                    }else if(computerMove === 'scissors'){
-                        result = 'You lose.';
-                    }
-                }
+};
 
-                if(result === 'You win.'){
-                    score.wins += 1;
-                }else if(result === 'Tie.'){
-                    score.ties += 1;
-                }else if(result === 'You lose.'){
-                    score.losses += 1;
-                }
+updateScoreElement();
 
-                localStorage.setItem('score', JSON.stringify(score));//local stotage
+function playGame(playerMove) {
+    const computerMove = pickComputerMove(); // step 1
+    // step 3:
+    let result = '';
+    
+    if (playerMove === 'scissors') {
+        if (computerMove === 'rock') {
+            result = 'You lose.';
+        } else if (computerMove === 'paper') {
+            result = 'You win.';
+        } else if (computerMove === 'scissors') {
+            result = 'Tie.';
+        }
+    } else if (playerMove === 'rock') {
+        if (computerMove === 'rock') {
+            result = 'Tie.';
+        } else if (computerMove === 'paper') {
+            result = 'You lose.';
+        } else if (computerMove === 'scissors') {
+            result = 'You win.';
+        }
+    } else { // paper or else
+        if (computerMove === 'rock') {
+            result = 'You win.';
+        } else if (computerMove === 'paper') {
+            result = 'Tie.';
+        } else if (computerMove === 'scissors') {
+            result = 'You lose.';
+        }
+    }
 
-                updateScoreElement();
-                
-                document.querySelector('.js-result').innerHTML = result;
+    if (result === 'You win.') {
+        score.wins += 1;
+    } else if (result === 'Tie.') {
+        score.ties += 1;
+    } else if (result === 'You lose.') {
+        score.losses += 1;
+    }
 
-                document.querySelector('.js-moves').innerHTML = `You 
-            <img src="images/${playerMove}-emoji.png" 
-            class="move-icon">
-            <img src="images/${computerMove}-emoji.png" 
-            class="move-icon">
-            Computer`;
-            }
+    localStorage.setItem('score', JSON.stringify(score));
 
-            function updateScoreElement(){
-                document.querySelector('.js-score').innerHTML = 
-                `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
-            }
+    updateScoreElement();
 
-            function pickComputerMove() {//step 2
-                let randomNumber = Math.random();
-                let computerMove = '';
+    document.querySelector('.js-result').innerHTML = result;
 
-                if(randomNumber < 1/3){
-                    computerMove = 'rock';
-                }else if(randomNumber >= 1/3 && randomNumber < 2/3){
-                    computerMove = 'paper';
-                }else if(randomNumber >= 2/3 && randomNumber < 1){
-                    computerMove = 'scissors';
-                    
-                }
-                return computerMove; //nothing will run after this because it return back to where the function was called
-                
-            }
+    document.querySelector('.js-moves').innerHTML = `You 
+        <img src="images/${playerMove}-emoji.png" 
+        class="move-icon">
+        <img src="images/${computerMove}-emoji.png" 
+        class="move-icon">
+        Computer`;
+}
+
+function updateScoreElement() {
+    document.querySelector('.js-score').innerHTML = 
+        `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
+}
+
+function pickComputerMove() { // step 2
+    let randomNumber = Math.random();
+    let computerMove = '';
+
+    if (randomNumber < 1 / 3) {
+        computerMove = 'rock';
+    } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
+        computerMove = 'paper';
+    } else if (randomNumber >= 2 / 3 && randomNumber < 1) {
+        computerMove = 'scissors';
+    }
+    
+    return computerMove;
+}
